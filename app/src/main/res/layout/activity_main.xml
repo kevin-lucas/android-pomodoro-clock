@@ -7,13 +7,12 @@
     android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
-
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="Pomodoro Clock"
+        android:layout_marginTop="24dp"
+        android:text="@string/title_pomodoro_app"
         android:textColor="@color/textColor"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -21,53 +20,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/fragment_layout"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="100dp"
-        android:background="@color/colorLight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="MissingConstraints">
-    </FrameLayout>
-
-    <ImageButton
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/tv_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorLight"
+        android:text="25:00"
+        android:textColor="@color/textColor"
+        android:textSize="68sp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_play"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <ImageButton
+        android:id="@+id/bt_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimary"
         android:src="@drawable/ic_pause"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_layout" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/button3"
+        android:id="@+id/bt_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorLight"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimary"
         android:src="@drawable/ic_play"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_layout"
-        app:layout_constraintStart_toStartOf="@+id/fragment_layout"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_layout" />
+        app:layout_constraintEnd_toStartOf="@+id/bt_stop"
+        app:layout_constraintStart_toEndOf="@+id/bt_pause" />
 
     <ImageButton
-        android:id="@+id/button4"
+        android:id="@+id/bt_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorLight"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimary"
         android:src="@drawable/ic_stop"
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_layout" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
