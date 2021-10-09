@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/root_layout"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".MainActivity">
@@ -20,11 +21,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_timer"
+    <Chronometer
+        android:id="@+id/ch_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="25:00"
         android:textColor="@color/textColor"
         android:textSize="68sp"
         app:layout_constraintBottom_toTopOf="@+id/bt_play"
@@ -40,7 +40,6 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_pause"
-        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -51,7 +50,6 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_play"
-        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bt_stop"
         app:layout_constraintStart_toEndOf="@+id/bt_pause" />
@@ -64,9 +62,20 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_stop"
-        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_session"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Work Session"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ch_timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

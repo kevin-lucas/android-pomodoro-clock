@@ -1,53 +1,100 @@
 package br.com.kevincode.pomodoroclock
 
+import android.content.DialogInterface
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
-import android.widget.Button
-import android.widget.Chronometer
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var clock: MyCountDownTimer
-    private var time: Long = 0L
+    private lateinit var chTimer: Chronometer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val timer = findViewById<TextView>(R.id.tv_timer)
         val play = findViewById<ImageButton>(R.id.bt_play)
         val stop = findViewById<ImageButton>(R.id.bt_stop)
         val pause = findViewById<ImageButton>(R.id.bt_pause)
+        val session = findViewById<TextView>(R.id.tv_session)
+        val chTimer = findViewById<Chronometer>(R.id.ch_timer)
+
+        var count = 0L
+        var isWorkSession = true
+        var countSession = 1
+
+        session.text = "Sessão $countSession"
+        chTimer.text = "25:00"
 
         play.setOnClickListener {
-            if (time == 0L){
-                clock = MyCountDownTimer(this, timer, 25 * 60000L, 1000)
-                clock.cancel()
-                clock.start()
-            } else {
-                clock = MyCountDownTimer(this, timer, time, 1000)
-                clock.start()
-            }
+            val minutes = if (count > 0) count else 25 * 60000L
+            chTimer.base = SystemClock.elapsedRealtime() + minutes
+            chTimer.isCountDown = true
+            chTimer.start()
         }
 
         stop.setOnClickListener {
-            clock.cancel()
+
+            chTimer.stop()
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Resetar Sessão")
+            builder.setMessage("Deseja pular a sessão atual?")
+            builder.setPositiveButton("Sim") { _, _ ->
+
+                if (isWorkSession) {
+                    chTimer.base = SystemClock.elapsedRealtime() + (5 * 60000L)
+                    session.text = "Descanso"
+                    setTheme(R.style.Theme_PomodoroClock_Rest)
+                    countSession += 1
+                    isWorkSession = false
+
+                } else {
+                    chTimer.base = SystemClock.elapsedRealtime() + (25 * 60000L)
+                    session.text = "Sessão $countSession"
+                    isWorkSession = true
+                }
+
+
+            }
+            builder.setNegativeButton("Não") { _, _ ->
+                chTimer.start()
+            }
+            builder.show()
         }
 
         pause.setOnClickListener {
-            time = clock.millisInFuture
-            clock.cancel()
+            chTimer.stop()
         }
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (clock != null) {
-            clock.cancel()
+        chTimer.setOnChronometerTickListener {
+
+            count = (SystemClock.elapsedRealtime() - chTimer.base) * -1
+
+            if (count < 0L) {
+
+                chTimer.stop()
+
+                if (isWorkSession) {
+                    chTimer.base = SystemClock.elapsedRealtime() + (5 * 60000L)
+                    session.text = "Descanso"
+                    countSession += 1
+                    isWorkSession = false
+
+                } else {
+                    chTimer.base = SystemClock.elapsedRealtime() + (25 * 60000L)
+                    session.text = "Sessão $countSession"
+                    setTheme(R.style.Theme_PomodoroClock_Rest)
+                    isWorkSession = true
+                }
+            }
         }
     }
 }
+
