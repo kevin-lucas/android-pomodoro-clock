@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         var isWorkSession = true
         var countSession = 1
 
+        chTimer.base = SystemClock.elapsedRealtime() + (5 * 60000L)
+
         session.text = "Sessão $countSession"
         chTimer.text = "25:00"
 
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             chTimer.base = SystemClock.elapsedRealtime() + minutes
             chTimer.isCountDown = true
             chTimer.start()
+            Toast.makeText(this, getString(R.string.timer_status_started), Toast.LENGTH_SHORT).show()
         }
 
         stop.setOnClickListener {
@@ -51,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 if (isWorkSession) {
                     chTimer.base = SystemClock.elapsedRealtime() + (5 * 60000L)
                     session.text = "Descanso"
-                    setTheme(R.style.Theme_PomodoroClock_Rest)
                     countSession += 1
                     isWorkSession = false
 
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     isWorkSession = true
                 }
 
-
+                Toast.makeText(this, getString(R.string.timer_status_restore), Toast.LENGTH_SHORT).show()
             }
             builder.setNegativeButton("Não") { _, _ ->
                 chTimer.start()
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
         pause.setOnClickListener {
             chTimer.stop()
+            Toast.makeText(this, getString(R.string.timer_status_paused), Toast.LENGTH_SHORT).show()
         }
 
         chTimer.setOnChronometerTickListener {
@@ -90,7 +93,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     chTimer.base = SystemClock.elapsedRealtime() + (25 * 60000L)
                     session.text = "Sessão $countSession"
-                    setTheme(R.style.Theme_PomodoroClock_Rest)
                     isWorkSession = true
                 }
             }

@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_pomodoro_app">Pomodoro Clock</string>
+    <string name="timer_status_paused">Pausado</string>
+    <string name="timer_status_started">Iniciado</string>
+    <string name="timer_status_restore">Resetado</string>
 </resources>
