@@ -3,7 +3,7 @@
 <p>Aplicativo para auxiliar na produtividade da rotina de trabalho.</p>
 
 # Features
-Requisitos retirados do repositório [Apps Ideias](https://github.com/florinpop17/app-ideas)
+Requisitos fornecidos pelo repositório [Apps Ideias](https://github.com/florinpop17/app-ideas)
 
 - [x] Usuário pode visualizar um sessão de trabalho de 25 minutos.
 - [x] Após a sessão de trabalho de 25 minutos, o usuário pode ver uma sessão de 5 minutos para realizar um pausa.
